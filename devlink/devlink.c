@@ -3642,7 +3642,7 @@ dpipe_tables_match_values_show(struct dpipe_ctx *ctx,
 static int dpipe_entry_show(struct dpipe_ctx *ctx, struct nlattr *nl)
 {
 	struct nlattr *nla_entry[DEVLINK_ATTR_MAX + 1] = {};
-	uint32_t entry_index;
+	uint64_t entry_index;
 	uint64_t counter;
 	int err;
 
@@ -3656,7 +3656,8 @@ static int dpipe_entry_show(struct dpipe_ctx *ctx, struct nlattr *nl)
 		return -EINVAL;
 	}
 
-	entry_index = mnl_attr_get_u32(nla_entry[DEVLINK_ATTR_DPIPE_ENTRY_INDEX]);
+	entry_index = mnl_attr_get_u64(nla_entry[DEVLINK_ATTR_DPIPE_ENTRY_INDEX]);
+
 	pr_out_uint(ctx->dl, "index", entry_index);
 
 	if (nla_entry[DEVLINK_ATTR_DPIPE_ENTRY_COUNTER]) {
